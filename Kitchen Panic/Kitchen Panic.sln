@@ -1,12 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen Panic.CSharp", "Kitchen Panic.CSharp.csproj", "{77AE0C89-22FE-ADD2-5D75-3ADAF8AE0EC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77AE0C89-22FE-ADD2-5D75-3ADAF8AE0EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AE0C89-22FE-ADD2-5D75-3ADAF8AE0EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AE0C89-22FE-ADD2-5D75-3ADAF8AE0EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AE0C89-22FE-ADD2-5D75-3ADAF8AE0EC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
