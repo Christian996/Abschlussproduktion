@@ -1,0 +1,12 @@
+newmtl Fenster_LangSG
+illum 4
+Kd 0.75 0.61 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Fenster_LangSG1
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
