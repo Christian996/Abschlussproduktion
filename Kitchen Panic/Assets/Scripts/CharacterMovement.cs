@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Input : MonoBehaviour {
+// Verarbeitet die Charaktersteuerung
+public class CharacterMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
