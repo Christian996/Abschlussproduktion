@@ -5,15 +5,19 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler 
 {
-    // HIntergrundgrafik des Joysticks
+    public float speed;
+    private Vector3 position;
+
+    // Background image
     private Image bgImg;
-    // Grafik für den Joystick selbst
+    // Joystick itself
     private Image joystckImg;
 
     private void Awake()
     {
         bgImg = GetComponent<Image>();
         joystckImg = GetComponentInChildren<Image>();
+        position = transform.position;
     }
     // Included from IDragHandler
     public virtual void OnDrag(PointerEventData ped)
