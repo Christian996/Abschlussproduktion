@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System;
 // Verarbeitet die Charaktersteuerung
 public class CharacterMovement : MonoBehaviour
@@ -14,6 +15,15 @@ public class CharacterMovement : MonoBehaviour
     // Kitchentools will be saved in a List
     // All Kitchentools have to be tagged with "Kitchentool"
     [SerializeField]
+=======
+// Verarbeitet die Charaktersteuerung
+public class CharacterMovement : MonoBehaviour
+{
+    private GameObject Player;
+
+    // Kitchentools will be saved in a List
+    // All Kitchentools have to be tagged with "Kitchentool"
+>>>>>>> refs/remotes/origin/master
     private List<GameObject> LKitchentools;
 
     void Awake()
@@ -22,18 +32,26 @@ public class CharacterMovement : MonoBehaviour
         if (Player != null)
             Debug.Log("Find Player");
 
+<<<<<<< HEAD
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
             Debug.Log("Agentname: " + agent.name);
 
         LKitchentools = new List<GameObject>();
         agentTarget = Vector3.zero;
+=======
+        LKitchentools = new List<GameObject>();
+>>>>>>> refs/remotes/origin/master
     }
 
     // Use this for initialization
     void Start()
     {
+<<<<<<< HEAD
         AddKtichentoolsToTheList();
+=======
+
+>>>>>>> refs/remotes/origin/master
     }
 
     // Update is called once per frame
@@ -41,6 +59,7 @@ public class CharacterMovement : MonoBehaviour
     {
 
     }
+<<<<<<< HEAD
 
     public void Move(Vector3 targetPosition)
     {
@@ -62,4 +81,6 @@ public class CharacterMovement : MonoBehaviour
         }
         Debug.Log("Anzahl der Kitchentools in der Liste:" + LKitchentools.Count);
     }
+=======
+>>>>>>> refs/remotes/origin/master
 }
