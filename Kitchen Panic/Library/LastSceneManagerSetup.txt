@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Szenen/1. Level/1. Level.unity
+- path: C:/Users/Christian SchmidC/Documents/Studium/FoodPron/FoodPron/Assets/MainMenu.unity
   isLoaded: 1
   isActive: 1
