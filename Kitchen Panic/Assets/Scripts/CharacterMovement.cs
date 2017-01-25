@@ -45,8 +45,13 @@ public class CharacterMovement : MonoBehaviour
     public void Move(Vector3 targetPosition)
     {
         agentTarget = targetPosition;
+
+        if(agent.transform.position != agentTarget)
+            Debug.Log("Target moved to: " + agentTarget); 
+
         agent.SetDestination(agentTarget);
-        Debug.DrawRay(transform.position, targetPosition, Color.red);
+        transform.LookAt(agentTarget);
+        Debug.DrawRay(transform.position, agentTarget - transform.position, Color.red );
     }
 
     private void AddKtichentoolsToTheList()

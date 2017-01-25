@@ -1,5 +1,4 @@
 sceneSetups:
-- path: "C:/Users/Christian SchmidC/Documents/Studium/KlassenCheckin/Chris/\xDCbungen/Unity/KIProjekt/KI_Nikola
-    Merkas_SuperAwesomeTowerdefends/Assets/Scenes/SuperAwesomeTowerDefense.unity"
+- path: C:/Users/Christian SchmidC/Documents/Studium/FoodPron/FoodPron/Assets/MainMenu.unity
   isLoaded: 1
   isActive: 1
