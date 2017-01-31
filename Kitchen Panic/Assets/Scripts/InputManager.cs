@@ -6,6 +6,7 @@ using System.Collections;
 public class InputManager : MonoBehaviour
 {
     Ray ray;
+    RaycastHit rayHit;
     public Vector3 targetPosition;
 
     CharacterMovement charMovement;
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
     {
         charMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
         targetPosition = charMovement.Player.transform.position;
+
     }
 
     // Use this for initialization
@@ -29,19 +31,24 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             TouchPos();
+            if(charMovement.checkIfMovable(targetPosition))
+                charMovement.Move(targetPosition);
+
         }
-        charMovement.Move(targetPosition);
+
     }
 
     private Vector3 TouchPos()
     {
         Plane plane = new Plane(Vector3.up, charMovement.Player.transform.position);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float point = 0f;
 
+        Physics.Raycast(Camera.main.transform.position, ray.direction, out rayHit);
+        float point = 0f;
         if (plane.Raycast(ray, out point))
             targetPosition = ray.GetPoint(point);
         Debug.Log("TargetPos: " + targetPosition);
+
 
         return targetPosition;
     }
