@@ -1,29 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System;
+
 // Verarbeitet die Charaktersteuerung
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
     public GameObject Player;
+
+    [SerializeField]
     private NavMeshAgent agent;
     private Vector3 agentTarget;
     private float speed;
 
-    // Kitchentools will be saved in a List
-    // All Kitchentools have to be tagged with "Kitchentool"
     [SerializeField]
-=======
-// Verarbeitet die Charaktersteuerung
-public class CharacterMovement : MonoBehaviour
-{
-    private GameObject Player;
+    private bool isMoveable;
+    private RaycastHit hit;
 
     // Kitchentools will be saved in a List
     // All Kitchentools have to be tagged with "Kitchentool"
->>>>>>> refs/remotes/origin/master
     private List<GameObject> LKitchentools;
 
     void Awake()
@@ -32,45 +28,38 @@ public class CharacterMovement : MonoBehaviour
         if (Player != null)
             Debug.Log("Find Player");
 
-<<<<<<< HEAD
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
             Debug.Log("Agentname: " + agent.name);
 
         LKitchentools = new List<GameObject>();
         agentTarget = Vector3.zero;
-=======
         LKitchentools = new List<GameObject>();
->>>>>>> refs/remotes/origin/master
+        isMoveable = false;
+        hit = new RaycastHit();
     }
 
     // Use this for initialization
     void Start()
     {
-<<<<<<< HEAD
         AddKtichentoolsToTheList();
-=======
 
->>>>>>> refs/remotes/origin/master
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Debug.DrawRay(Camera.main.transform.position, agentTarget - Camera.main.transform.position, Color.red);
     }
-<<<<<<< HEAD
 
     public void Move(Vector3 targetPosition)
     {
         agentTarget = targetPosition;
 
-        if(agent.transform.position != agentTarget)
-            Debug.Log("Target moved to: " + agentTarget); 
-
         agent.SetDestination(agentTarget);
-        transform.LookAt(agentTarget);
-        Debug.DrawRay(transform.position, agentTarget - transform.position, Color.red );
+        Debug.DrawRay(transform.position, agentTarget - transform.position, Color.red);
+        agent.transform.forward = Vector3.Lerp(agent.transform.forward, agentTarget, 2f);
+
     }
 
     private void AddKtichentoolsToTheList()
@@ -81,6 +70,20 @@ public class CharacterMovement : MonoBehaviour
         }
         Debug.Log("Anzahl der Kitchentools in der Liste:" + LKitchentools.Count);
     }
-=======
->>>>>>> refs/remotes/origin/master
+
+    public bool checkIfMovable(Vector3 targetPosition)
+    {
+        agentTarget = targetPosition;
+        if (Physics.Raycast(Camera.main.transform.position, agentTarget - Camera.main.transform.position, out hit))
+        {
+            Debug.Log("Hit object's tag: " + hit.collider.tag);
+            if (hit.collider.CompareTag("Kitchentool"))
+            {
+                return isMoveable = true;
+            }
+
+        }
+        Debug.Log("Char isn't moveable");
+        return isMoveable = false;
+    }
 }
