@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
     {
         charMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
         //uiManager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
-        touchPosition = charMovement.Player.transform.position;
+        touchPosition = Vector3.zero;
 
     }
 
@@ -41,25 +41,34 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("Get Mousebutton");
             TouchPos();
-            if(charMovement.checkIfMovable(touchPosition))
+            Debug.Log("Touched Position: " + touchPosition);
+            if (charMovement.checkIfMovable(touchPosition))
                 charMovement.Move(touchPosition);
 
 
         }
 
+        //if (Input.GetMouseButtonDown(0))
+        //{ 
+        //    TouchPos();
+
+        //}       
+
+        //charMovement.Move(touchPosition);   
+
     }
 
     private Vector3 TouchPos()
     {
-        Plane plane = new Plane(Vector3.up, charMovement.Player.transform.position);
+        Plane plane = new Plane(Vector3.up, GameObject.FindGameObjectWithTag("Player").transform.position);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Physics.Raycast(Camera.main.transform.position, ray.direction, out rayHit);
+        //Physics.Raycast(Camera.main.transform.position, ray.direction, out rayHit);
         float point = 0f;
+
         if (plane.Raycast(ray, out point))
             touchPosition = ray.GetPoint(point);
-        Debug.Log("TargetPos: " + touchPosition);
 
+        Debug.Log("TargetPos: " + touchPosition);
 
         return touchPosition;
     }
