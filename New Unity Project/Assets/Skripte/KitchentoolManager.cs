@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class KitchentoolManager : MonoBehaviour
 {
@@ -19,25 +20,63 @@ public class KitchentoolManager : MonoBehaviour
 
     // Bools to check if one Kitchentool is finished
     // if true, canvas will be visible
-    bool fishCooked;
+    bool carotteCooked;
     bool riceCooked;
+    bool riceCookerCooked;
+    bool fishCooked;
     bool noriCooked;
     bool makisuCooked;
-    bool riceCookerCooked;
-    bool carotteCooked;
 
+    // Images for the icons
+    Image im_carotte;
+    Image im_rice;
+    Image im_riceCooker;
+    Image im_fish;
+    Image im_nori;
+    Image im_makisu;
 
     void Awake()
     {
         activeKitchentool = null;
         clickedKitchentool = null;
         smokeParticles = this.GetComponentInChildren<ParticleSystem>();
+
+        // Find Images in the Scene
+        im_carotte = GameObject.Find("Image_Karotte").GetComponent<Image>();
+        if (im_carotte == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Karotte");
+
+        im_rice = GameObject.Find("Image_Reis").GetComponent<Image>();
+        if (im_rice == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Reis");
+
+        im_riceCooker = GameObject.Find("Image_Reiskocher").GetComponent<Image>();
+        if (im_riceCooker == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Reiskocher");
+
+        im_fish = GameObject.Find("Image_Fisch").GetComponent<Image>();
+        if (im_fish == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Fisch");
+
+        im_nori = GameObject.Find("Image_Nori").GetComponent<Image>();
+        if (im_nori == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Nori");
+
+        im_makisu = GameObject.Find("Image_Makisu").GetComponent<Image>();
+        if (im_makisu == null)
+            Debug.Log("Add a Image-Component to the UI and make sure, the Name is Image_Makisu");
+
     }
     // Use this for initialization
     void Start()
     {
-        //smokeSparticles.playOnAwake = false;
-        //smokeSparticles.Stop();
+        // make sure, that no bool is set to true at the beginnig from the games
+        carotteCooked = false;
+        riceCooked = false;
+        riceCookerCooked = false;
+        fishCooked = false; 
+        noriCooked = false;
+        makisuCooked = false;
     }
 
     void Update()
@@ -47,7 +86,7 @@ public class KitchentoolManager : MonoBehaviour
 
         if (smokeParticles.time == cookTimeCarotte)
             Debug.Log("Particlesystem abgeschlossen");
-
+        #region timer for kitchentools
         // Check the clicked Kitchentool to make clear, what variables should used
         if (activeKitchentool != null)
         {
@@ -56,57 +95,64 @@ public class KitchentoolManager : MonoBehaviour
                 // reduce cooktime
                 cookTimeCarotte -= Time.deltaTime;
                 // Check if cookTime reaching 0
-                // if true, activate the icon for the kitchentool
+                // if true, give the true bool to the ActivateIcon-Fucntion
+                // it will activate the icons
                 if (cookTimeCarotte <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(carotteCooked = true);
 
-            } else if (activeKitchentool.name == "Reis")
+            }
+            else if (activeKitchentool.name == "Reis")
             {
                 // reduce cooktime
                 cookTimeRice -= Time.deltaTime;
                 // Check if cookTime reaching 0
                 // if true, activate the icon for the kitchentool
                 if (cookTimeRice <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(riceCooked = true);
 
-            } else if (activeKitchentool.name == "Reiskocher")
+            }
+            else if (activeKitchentool.name == "Reiskocher")
             {
                 // reduce cooktime
                 cookTimeRiceCooker -= Time.deltaTime;
                 // Check if cookTime reaching 0
                 // if true, activate the icon for the kitchentool
                 if (cookTimeRiceCooker <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(riceCookerCooked = true);
 
-            }else if(activeKitchentool.name == "Fisch")
+            }
+            else if (activeKitchentool.name == "Fisch")
             {
                 // reduce cooktime
                 cookTimeFish -= Time.deltaTime;
                 // Check if cookTime reaching 0
                 // if true, activate the icon for the kitchentool
                 if (cookTimeFish <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(fishCooked = true);
 
-            }else if(activeKitchentool.name == "Nori")
+            }
+            else if (activeKitchentool.name == "Nori")
             {
                 // reduce cooktime
                 cookTimeNori -= Time.deltaTime;
                 // Check if cookTime reaching 0
                 // if true, activate the icon for the kitchentool
                 if (cookTimeNori <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(noriCooked = true);
 
-            }else if(activeKitchentool.name == "Makisu")
+            }
+            else if (activeKitchentool.name == "Makisu")
             {
                 // reduce cooktime
                 cookTimeMakisu -= Time.deltaTime;
                 // Check if cookTime reaching 0
                 // if true, activate the icon for the kitchentool
                 if (cookTimeMakisu <= 0)
-                    ActivateIcon(activeKitchentool);
+                    ActivateIcon(makisuCooked = true);
 
             }
         }
+        #endregion
 
         //ActivateIcon(smokeParticles, 
     }
@@ -223,9 +269,15 @@ public class KitchentoolManager : MonoBehaviour
 
     // Called in the update - function to check if duration from particle system is finished
     // after finishing, set icon transparence to 100
-    void ActivateIcon(GameObject activeKitchentool)
+    void ActivateIcon(bool cookedKitchentool)
     {
-        Debug.Log("Activate Icon for " + activeKitchentool.name);
+        // Change Alpha-canal to 100
+        // Check out how to
+        // Check what bool is true
+        if (carotteCooked)
+        {
+            //im_carotte.
+        }
     }
 
 }
