@@ -65,8 +65,9 @@
   <ItemGroup>
     <Compile Include="Assets\Skripte\CameraMovement.cs" />
     <Compile Include="Assets\Skripte\CharacterMovement.cs" />
-    <Compile Include="Assets\Skripte\Geräte.cs" />
+    <Compile Include="Assets\Skripte\CustomerManager.cs" />
     <Compile Include="Assets\Skripte\InputManager.cs" />
+    <Compile Include="Assets\Skripte\KitchentoolManager.cs" />
     <Compile Include="Assets\Skripte\UIManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

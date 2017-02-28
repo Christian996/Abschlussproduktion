@@ -12,6 +12,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField]
     private NavMeshAgent agent;
     private Vector3 agentTarget;
+    [SerializeField]
+    private float distanceToTarget;
     private float speed;
 
     [SerializeField]
@@ -34,7 +36,6 @@ public class CharacterMovement : MonoBehaviour
 
         LKitchentools = new List<GameObject>();
         agentTarget = Vector3.zero;
-        LKitchentools = new List<GameObject>();
         isMoveable = false;
         hit = new RaycastHit();
     }
@@ -50,6 +51,10 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, agentTarget - Camera.main.transform.position, Color.red);
+        if (agentTarget != null)
+            distanceToTarget = agent.remainingDistance;
+        
+
     }
 
     public void Move(Vector3 targetPosition)
@@ -59,6 +64,14 @@ public class CharacterMovement : MonoBehaviour
         agent.SetDestination(agentTarget);
         Debug.DrawRay(transform.position, agentTarget - transform.position, Color.red);
         agent.transform.forward = Vector3.Lerp(agent.transform.forward, agentTarget, 2f);
+
+        //Check if playerreached the target
+        if (distanceToTarget < 0.1f)
+        {
+            // Activate ParticleSystem
+            Debug.Log(hit.collider.gameObject.name);
+            hit.collider.gameObject.GetComponent<KitchentoolManager>().StartParticleSystem(hit.collider.gameObject);
+        }
 
     }
 
