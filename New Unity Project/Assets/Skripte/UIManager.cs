@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         bt_Pause = GetComponentInChildren<Button>();
+        if(bt_Pause != null)
+            Debug.Log("Pausebutton found: " + bt_Pause.name);
     }
     // Use this for initialization
     void Start()

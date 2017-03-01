@@ -19,6 +19,13 @@ public class CameraMovement : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         joystckImg = GetComponentInChildren<Image>();
         position = transform.position;
     }
+
+    private void Start()
+    {
+        this.transform.position = new Vector3(-8.05f, 9.5f, -7.73f);
+        this.transform.eulerAngles = new Vector3(55.205f, 89.371f, 0f);
+    }
+
     // Included from IDragHandler
     public virtual void OnDrag(PointerEventData ped)
     {

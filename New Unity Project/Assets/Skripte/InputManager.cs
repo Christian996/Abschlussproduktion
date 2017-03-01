@@ -18,11 +18,18 @@ public class InputManager : MonoBehaviour
 
     CharacterMovement charMovement;
     //UIManager uiManager;
+    //bool isUI;
 
     void Awake()
     {
         charMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+        if (charMovement == null)
+            Debug.Log("No Object with name Player found. Make sure, the Player object has the tag Player");
+
         //uiManager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
+        //if (uiManager == null)
+        //    Debug.Log("No GameObject with name UI found. Make sure the UI is tagged UI");
+
         touchPosition = Vector3.zero;
 
     }
@@ -45,16 +52,11 @@ public class InputManager : MonoBehaviour
             if (charMovement.checkIfMovable(touchPosition))
                 charMovement.Move(touchPosition);
 
+            //if (isUI)
+            //    uiManager.PauseGame();
+
 
         }
-
-        //if (Input.GetMouseButtonDown(0))
-        //{ 
-        //    TouchPos();
-
-        //}       
-
-        //charMovement.Move(touchPosition);   
 
     }
 
@@ -67,6 +69,11 @@ public class InputManager : MonoBehaviour
 
         if (plane.Raycast(ray, out point))
             touchPosition = ray.GetPoint(point);
+
+        //Physics.Raycast(ray, out rayHit);
+        //if (rayHit.collider.tag == "Button")
+        //    isUI = true;
+        //else isUI = false;
 
         Debug.Log("TargetPos: " + touchPosition);
 
