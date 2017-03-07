@@ -17,8 +17,8 @@ public class InputManager : MonoBehaviour
     public Vector3 touchPosition;
 
     CharacterMovement charMovement;
-    //UIManager uiManager;
-    //bool isUI;
+    GameManager gameManager;
+    bool isHitUi;
 
     void Awake()
     {
@@ -26,9 +26,9 @@ public class InputManager : MonoBehaviour
         if (charMovement == null)
             Debug.Log("No Object with name Player found. Make sure, the Player object has the tag Player");
 
-        //uiManager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
-        //if (uiManager == null)
-        //    Debug.Log("No GameObject with name UI found. Make sure the UI is tagged UI");
+        gameManager = GameObject.FindGameObjectWithTag("UI").GetComponent<GameManager>();
+        if (gameManager == null)
+            Debug.Log("No GameObject with name UI found. Make sure the UI is tagged UI");
 
         touchPosition = Vector3.zero;
 
@@ -52,8 +52,26 @@ public class InputManager : MonoBehaviour
             if (charMovement.checkIfMovable(touchPosition))
                 charMovement.Move(touchPosition);
 
-            //if (isUI)
-            //    uiManager.PauseGame();
+            if (isHitUi)
+            {
+                if (rayHit.collider.name == "PauseCollider")
+                {
+                    Debug.Log("Hit " + rayHit.collider.name + " .");
+                    gameManager.ChangeGamestate();
+                }
+
+                if (rayHit.collider.name == "ContinueCollider")
+                {
+                    Debug.Log("Hit " + rayHit.collider.name + " .");
+                    gameManager.ChangeGamestate();
+                }
+
+                if (rayHit.collider.name == "QuietCollider")
+                {
+                    Debug.Log("Hit " + rayHit.collider.name + " .");
+                    gameManager.ExitGame();
+                }
+            }
 
 
         }
@@ -67,13 +85,15 @@ public class InputManager : MonoBehaviour
         //Physics.Raycast(Camera.main.transform.position, ray.direction, out rayHit);
         float point = 0f;
 
+        // Raycast will hit the Collider from the Image because the normal UI function isnt working
+        // Collder of each button will get specific names
+        Physics.Raycast(ray, out rayHit);
+        if (rayHit.collider.tag == "Button")
+            isHitUi = true;
+        else isHitUi = false;
+
         if (plane.Raycast(ray, out point))
             touchPosition = ray.GetPoint(point);
-
-        //Physics.Raycast(ray, out rayHit);
-        //if (rayHit.collider.tag == "Button")
-        //    isUI = true;
-        //else isUI = false;
 
         Debug.Log("TargetPos: " + touchPosition);
 
