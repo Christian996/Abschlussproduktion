@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+// Script is belonging to all Objects with the Tag "Kitchentool"
 public class KitchentoolManager : MonoBehaviour
 {
     // Particlesystem for each Object
